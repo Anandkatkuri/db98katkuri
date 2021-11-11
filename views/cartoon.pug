@@ -3,12 +3,12 @@ extends layout
 block content
   h1= title
   - const cartoon = ['cartoon_type','size','age']
-  - let results;
+
   script.
     function buy(x){
       alert('Purchased Item: ' + x)
    } 
   div(class='container-fluid')
     div(class='row')
-      each results, index in cartoon
-        div(class='col-sm-2' onclick='buy('+index+')') #{results}
+      each result, index in results
+        div(class='col-sm-2' onclick='buy('+index+')') 'Cartoon Type:'  #{result.cartoon_type}  'Size:' #{result.size} 'Age:' #{result.age}

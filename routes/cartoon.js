@@ -1,9 +1,7 @@
-var express = require("express");
-var router = express.Router();
-
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("cartoon", { title: "Search Results cartoon" });
-});
-
-module.exports = router;
+var express = require('express'); 
+const cartoon_controlers= require('../controllers/cartoon'); 
+var router = express.Router(); 
+ 
+/* GET costumes */ 
+router.get('/', cartoon_controlers.cartoon_view_all_Page ); 
+module.exports = router; 
