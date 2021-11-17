@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let cartoonid = toShow._id 
+  - let cartoon_type = toShow.cartoon_type 
+  - let cartoonage = toShow.age
+  - let cartoonsize = toShow.size 
+  div 
+    div.row 
+      div(class='costumeAttr mr-3') cartoon ID is: 
+      div #{cartoonid} 
+    div.row 
+      div(class='costumeAttr mr-3') cartoon Type is: 
+      div #{cartoon_type} 
+    div.row 
+      div(class='costumeAttr mr-3') cartoon Size is: 
+      div #{cartoonage} 
+    div.row 
+      div(class='costumeAttr mr-3') cartoon Cost is: 
+      div #{cartoonsize} 

@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let cartoonid = toShow._id 
+    - let  cartoon_type = toShow.cartoon_type 
+    - let cartoonage = toShow.age 
+    - let cartoonsize = toShow.size 
+    - let actionid = "/resource/cartoon/" + cartoonid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='costumeAttr mr-3') cartoon ID is: 
+        div #{cartoonid} 
+      div.row 
+        div(class='costumeAttr mr-3') cartoon Type is: 
+        div #{cartoon_type} 
+      div.row 
+        div(class='costumeAttr mr-3') cartoon Size is: 
+        div #{cartoonsize} 
+      div.row 
+        div(class='costumeAttr mr-3') cartoon Cost is: 
+        div #{cartoonage} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the cartoon collection 
+      window.location.href='/cartoon' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/cartoon' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 

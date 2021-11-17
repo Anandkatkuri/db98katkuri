@@ -1,0 +1,43 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let cartoonid = toShow._id 
+  - let cartoon_type = toShow.cartoon_type 
+  - let cartoonage = toShow.age 
+  - let cartoonsize = toShow.size 
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{cartoonid} 
+  - let actionid = "/resource/cartoon/" + cartoonid 
+  form(id='cartoonForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.costumeAttr(for='cartoon_type') cartoon type 
+        input#cartoon_type(type='text', name='cartoon_type', value= cartoon_type ) 
+    div.form-group 
+        label.costumeAttr(for='size') cartoon size 
+        input#size(type='text', name='size', value= cartoonsize ) 
+    div.form-group 
+        label.costumeAttr(for='cartoonage') cartoon age 
+        input#age(type='number', name='cartoonage', value= cartoonage ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['cartoonForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 
